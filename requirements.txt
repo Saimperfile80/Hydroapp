@@ -1,0 +1,34 @@
+# Framework principal
+PyQt6>=6.5.0
+PyQt6-WebEngine>=6.5.0
+
+# Gestion de données
+pandas>=1.5.0
+numpy>=1.23.0
+openpyxl>=3.10.0
+
+# Données géospatiales
+geopandas>=0.12.0
+shapely>=2.0.0
+fiona>=1.9.0
+
+# Rasters
+rasterio>=1.3.0
+rio-cogeo>=4.1.0
+
+# Visualisation
+matplotlib>=3.7.0
+plotly>=5.14.0
+
+# PDF et export
+reportlab>=4.0.0
+Pillow>=10.0.0
+
+# IA et calculs
+scikit-learn>=1.3.0
+tensorflow>=2.13.0
+torch>=2.0.0
+
+# Utilitaires
+scipy>=1.11.0
+sqlalchemy>=2.0.0

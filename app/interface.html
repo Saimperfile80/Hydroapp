@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroAI - Interface Interactive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #13a4ec 0%, #0088cc 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #e0e0e0;
+            overflow-x: auto;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 140px;
+        }
+        
+        .tab-button:hover {
+            background: #efefef;
+            color: #13a4ec;
+        }
+        
+        .tab-button.active {
+            background: white;
+            color: #13a4ec;
+            border-bottom: 3px solid #13a4ec;
+        }
+        
+        .content {
+            padding: 30px;
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #13a4ec;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .box {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #13a4ec;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .button {
+            background: #13a4ec;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: background 0.3s ease;
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .button:hover {
+            background: #0088cc;
+        }
+        
+        .button.success {
+            background: #4CAF50;
+        }
+        
+        .button.success:hover {
+            background: #45a049;
+        }
+        
+        .button.warning {
+            background: #FF9800;
+        }
+        
+        .button.warning:hover {
+            background: #e68900;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .code {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+        }
+        
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-button {
+                flex: 0 0 auto;
+                min-width: 120px;
+                padding: 12px 15px;
+                font-size: 0.85em;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌊 HydroAI</h1>
+            <p>Plateforme de modélisation hydrogéologique intégrée avec IA</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab(0)">🏠 Accueil</button>
+            <button class="tab-button" onclick="switchTab(1)">📊 Données</button>
+            <button class="tab-button" onclick="switchTab(2)">🔲 Géométrie</button>
+            <button class="tab-button" onclick="switchTab(3)">⚙️ Simulation</button>
+            <button class="tab-button" onclick="switchTab(4)">🤖 IA</button>
+            <button class="tab-button" onclick="switchTab(5)">📈 Résultats</button>
+            <button class="tab-button" onclick="switchTab(6)">💧 Bassin</button>
+        </div>
+        
+        <div class="content">
+            <!-- TAB 1: ACCUEIL -->
+            <div class="tab-content active">
+                <div class="section">
+                    <h2>🏠 Bienvenue dans HydroAI</h2>
+                    <div class="box">
+                        <p style="font-size: 1.05em; line-height: 1.6;">
+                            HydroAI est une plateforme complète de <strong>modélisation hydrogéologique 2D/3D</strong> 
+                            par éléments finis avec intégration d'<strong>intelligence artificielle</strong>. 
+                            Elle vous permet de simuler l'écoulement souterrain, le transport de contaminants 
+                            et d'analyser les ressources en eau avec des outils IA intégrés.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>✨ Fonctionnalités principales</h2>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                        <div class="box">
+                            <strong>📥 Importation multiformat</strong><br>
+                            CSV, Excel, Surfer, GeoTIFF, Shapefile, GeoJSON
+                        </div>
+                        <div class="box">
+                            <strong>🔲 Maillage intelligent</strong><br>
+                            Triangulation 2D et extrusion 3D par couches
+                        </div>
+                        <div class="box">
+                            <strong>⚙️ Solveur EF</strong><br>
+                            Écoulement et transport par éléments finis
+                        </div>
+                        <div class="box">
+                            <strong>🤖 IA intégrée</strong><br>
+                            Détection anomalies et suggestions paramétriques
+                        </div>
+                        <div class="box">
+                            <strong>💧 Bassin versant</strong><br>
+                            Délimitation et analyses hydrologiques
+                        </div>
+                        <div class="box">
+                            <strong>📊 Visualisation</strong><br>
+                            Cartes, coupes, séries temporelles, export PDF
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>🚀 Démarrage rapide</h2>
+                    <ol style="margin-left: 20px; line-height: 2;">
+                        <li>Accédez à l'onglet <strong>📊 Données</strong> pour importer vos fichiers</li>
+                        <li>Définissez votre domaine d'étude dans <strong>🔲 Géométrie</strong></li>
+                        <li>Configurez les conditions aux limites dans <strong>⚙️ Simulation</strong></li>
+                        <li>Utilisez le module <strong>🤖 IA</strong> pour valider vos paramètres</li>
+                        <li>Lancez la simulation et consultez les <strong>📈 Résultats</strong></li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- TAB 2: DONNÉES -->
+            <div class="tab-content">
+                <div class="section">
+                    <h2>📊 Gestion des données</h2>
+                    <button class="button success">📥 Sélectionner fichier</button>
+                    <p style="margin-top: 10px; color: #666;">✓ demo_wells.csv (6 points importés)</p>
+                </div>
+                
+                <div class="section">
+                    <h2>📈 Aperçu des données</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>X (m)</th>
+                                <th>Y (m)</th>
+                                <th>Z (m)</th>
+                                <th>Charge (m)</th>
+                                <th>Conductivité (m/s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100.0</td>
+                                <td>200.0</td>
+                                <td>50.5</td>
+                                <td>45.3</td>
+                                <td>1.0e-05</td>
+                            </tr>
+                            <tr>
+                                <td>101.0</td>
+                                <td>201.0</td>
+                                <td>51.2</td>
+                                <td>45.5</td>
+                                <td>1.2e-05</td>
+                            </tr>
+                            <tr>
+                                <td>102.0</td>
+                                <td>202.0</td>
+                                <td>49.8</td>
+                                <td>45.1</td>
+                                <td>9.8e-06</td>
+                            </tr>
+                            <tr>
+                                <td>103.0</td>
+                                <td>203.0</td>
+                                <td>52.1</td>
+                                <td>45.8</td>
+                                <td>1.1e-05</td>
+                            </tr>
+                            <tr>
+                                <td>104.0</td>
+                                <td>204.0</td>
+                                <td>50.9</td>
+                                <td>45.4</td>
+                                <td>1.05e-05</td>
+                            </tr>
+                            <tr>
+                                <td>105.0</td>
+                                <td>205.0</td>
+                                <td>51.5</td>
+                                <td>45.6</td>
+                                <td>1.15e-05</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section">
+                    <h2>📊 Statistiques</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">Points de données</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">102.5</div>
+                            <div class="stat-label">X moyen (m)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">51.0</div>
+                            <div class="stat-label">Z moyen (m)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Valeurs manquantes</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>📂 Formats supportés</h2>
+                    <div class="box">
+                        CSV, TXT, DAT, XYZ, XLSX, XLS, GRD, ASC, TIF, TIFF, SHP, GEOJSON, JSON (13 formats)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB 3: GÉOMÉTRIE -->
+            <div class="tab-content">
+                <div class="section">
+                    <h2>🔲 Géométrie et maillage</h2>
+                </div>
+                
+                <div class="section">
+                    <h2>🗺️ Définition du domaine</h2>
+                    <div class="grid-2col">
+                        <div class="box">
+                            <strong>Projection:</strong> EPSG:32632 (UTM Zone 32N)<br>
+                            <strong>Xmin (m):</strong> 100.00<br>
+                            <strong>Xmax (m):</strong> 105.00
+                        </div>
+                        <div class="box">
+                            <strong>Ymin (m):</strong> 200.00<br>
+                            <strong>Ymax (m):</strong> 205.00<br>
+                            <strong>Zmin-Zmax (m):</strong> 49.8 - 52.1
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>⚙️ Paramètres de maillage</h2>
+                    <div class="box">
+                        <strong>Type de maillage:</strong> Triangulation 2D / Extrusion 3D par couches<br><br>
+                        <strong>Taille min éléments (m):</strong> 50.0<br>
+                        <strong>Taille max éléments (m):</strong> 500.0<br>
+                        <strong>Nombre de couches (3D):</strong> 5<br><br>
+                        <button class="button">🔧 Générer maillage</button>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>👁️ Aperçu du maillage</h2>
+                    <div style="background: #f0f0f0; padding: 20px; border-radius: 8px; font-family: monospace; line-height: 1.2;">
+                        <pre style="margin: 0;">
+       ╱╲      ╱╲      ╱╲
+      ╱  ╲    ╱  ╲    ╱  ╲
+     ╱────╲  ╱────╲  ╱────╲
+    ╱  ┣╋  ╲╱  ┣╋  ╲╱  ┣╋  ╲
+   ╱   ╰╊   ╱   ╰╊   ╱   ╰╊   ╲
+  ╱────────╱─────────╱─────────╲
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB 4: SIMULATION -->
+            <div class="tab-content">
+                <div class="section">
+                    <h2>⚙️ Configuration de simulation</h2>
+                </div>
+                
+                <div class="section">
+                    <h2>🚧 Conditions aux limites</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Valeur</th>
+                                <th>Unité</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dirichlet</td>
+                                <td>45.5</td>
+                                <td>m</td>
+                                <td>Charge fixe au NO</td>
+                            </tr>
+                            <tr>
+                                <td>Neumann</td>
+                                <td>0.1</td>
+                                <td>m/j</td>
+                                <td>Flux au bord est</td>
+                            </tr>
+                            <tr>
+                                <td>Rivière</td>
+                                <td>47.0</td>
+                                <td>m</td>
+                                <td>Limite perméable</td>
+                            </tr>
+                            <tr>
+                                <td>Drain</td>
+                                <td>50.0</td>
+                                <td>m</td>
+                                <td>Puits de pompage</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section">
+                    <h2>⚙️ Paramètres hydrodynamiques</h2>
+                    <div class="box">
+                        Conductivité K (m/s): <strong>1.0e-05</strong><br>
+                        Porosité (%): <strong>35.0</strong><br>
+                        Coeff. d'emmagasinement: <strong>0.001</strong><br>
+                        Temps de simulation (j): <strong>365</strong><br>
+                        Pas de temps (j): <strong>1.0</strong>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>▶️ Exécution</h2>
+                    <button class="button success">▶️ Lancer simulation</button>
+                    <div style="margin-top: 20px;">
+                        <div style="background: #e0e0e0; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%); height: 100%; width: 45%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75em; font-weight: bold;">45%</div>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9em;">En cours... Étape 164/365</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB 5: IA -->
+            <div class="tab-content">
+                <div class="section">
+                    <h2>🤖 Intelligence Artificielle</h2>
+                </div>
+                
+                <div class="alert alert-success">
+                    ✓ Module IA prêt. Prêt à analyser vos données.
+                </div>
+                
+                <div class="section">
+                    <h2>🔍 Analyse des données</h2>
+                    <button class="button success">🔍 Analyser les données</button>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="box">
+                            <strong>✓ Détection d'anomalies</strong><br>
+                            0 anomalies détectées | Score: EXCELLENT (100%)
+                        </div>
+                        <div class="box">
+                            <strong>✓ Estimation de valeurs manquantes</strong><br>
+                            0 valeurs manquantes | Confiance moyenne: 92%
+                        </div>
+                        <div class="box">
+                            <strong>✓ Suggestion de plages de paramètres</strong><br>
+                            Conductivité suggérée: 1.2e-05 m/s (Confiance: 87%)
+                        </div>
+                        <div class="box">
+                            <strong>✓ Validation pré-calcul</strong><br>
+                            Statut: OK - Tous les paramètres sont cohérents
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>💡 Recommandations du module IA</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                            <div class="stat-value">87%</div>
+                            <div class="stat-label">Confiance conductivité</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);">
+                            <div class="stat-value">92%</div>
+                            <div class="stat-label">Qualité des données</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Cohérence paramètres</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB 6: RÉSULTATS -->
+            <div class="tab-content">
+                <div class="section">
+                    <h2>📈 Résultats et visualisation</h2>
+                </div>
+                
+                <div class="section">
+                    <h2>📊 Type de visualisation</h2>
+                    <select style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                        <option>Cartes de charge hydraulique</option>
+                        <option>Panaches de contaminants</option>
+                        <option>Coupes verticales</option>
+                        <option>Séries temporelles</option>
+                        <option>Champs de vitesse</option>
+                    </select>
+                </div>
+                
+                <div class="section">
+                    <h2>📊 Carte de charge hydraulique</h2>
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                        Charge (m): 45.0-52.0 | Gradient: 0.001-0.01 m/m | Direction: NO → SE
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>💾 Export des résultats</h2>
+                    <button class="button warning">📷 PNG</button>
+                    <button class="button warning">📄 PDF</button>
+                    <button class="button warning">📊 CSV</button>
+                    <button class="button warning">🔺 VTK</button>
+                </div>
+            </div>
+            
+            <!-- TAB 7: BASSIN -->
+            <div class="tab-content">
+                <div class="section">
+                    <h2>💧 Analyse de bassin versant</h2>
+                </div>
+                
+                <div class="section">
+                    <h2>🗺️ Modèle Numérique de Terrain</h2>
+                    <button class="button">📥 Importer MNT (GeoTIFF, Surfer)</button>
+                </div>
+                
+                <div class="section">
+                    <h2>🎯 Délimitation de bassin</h2>
+                    <button class="button success">🎯 Délimiter bassin versant</button>
+                </div>
+                
+                <div class="section">
+                    <h2>📊 Statistiques du bassin</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="stat-value">125.5</div>
+                            <div class="stat-label">Surface (km²)</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="stat-value">12.3%</div>
+                            <div class="stat-label">Pente moyenne</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="stat-value">450.5</div>
+                            <div class="stat-label">Altitude moyenne (m)</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="stat-value">185.3</div>
+                            <div class="stat-label">Réseau hydrographique (km)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>💾 Export</h2>
+                    <button class="button warning">📦 Exporter en Shapefile</button>
+                    <button class="button warning">📊 Exporter stats CSV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function switchTab(index) {
+            // Hide all tabs
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            contents[index].classList.add('active');
+            buttons[index].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

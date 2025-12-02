@@ -1,0 +1,307 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║                          👋 START HERE 👋                                ║
+║                                                                           ║
+║                    HydroAI - Hydrogeological Modeling                    ║
+║                      Educational Platform v0.1.0                        ║
+║                                                                           ║
+║                     November 26, 2025 - Ready to Use                    ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+⚡ QUICK START (3 minutes)
+═══════════════════════════════════════════════════════════════════════════
+
+If you just want to run the app immediately:
+
+1. Open PowerShell/Command Prompt
+2. Navigate to this folder: cd hydroai
+3. Type: python launcher.py
+
+That's it! The application should open in 1-2 seconds.
+
+If it doesn't work → see "TROUBLESHOOTING" below
+
+
+🎯 FIRST TIME SETUP (10 minutes)
+═══════════════════════════════════════════════════════════════════════════
+
+Option A: Windows (Recommended)
+   1. Install Python from https://python.org
+      ✓ CHECK "Add Python to PATH" during installation
+   2. Open PowerShell in this folder
+   3. Type: pip install numpy scipy pandas PySide6 matplotlib
+   4. Type: python launcher.py
+
+Option B: Already have Python?
+   Just do:
+   pip install numpy scipy pandas PySide6 matplotlib
+   python launcher.py
+
+
+📚 DOCUMENTATION (What to read next)
+═══════════════════════════════════════════════════════════════════════════
+
+START WITH ONE OF THESE:
+
+⭐ For Quick Start (5 min):
+   → Open: QUICKSTART.md
+
+⭐ For Overview (10 min):
+   → Open: README.md
+
+⭐ For Windows Setup (15 min):
+   → Open: INSTALLATION_WINDOWS.txt
+
+⭐ For Case Studies (1-2 hours):
+   → Open: GUIDE_ETUDIANT.py
+
+⭐ For Technical Details:
+   → Open: ARCHITECTURE.md
+
+⭐ For Navigation Help:
+   → Open: INDEX.md
+
+Don't know what to read? → See INDEX.md
+
+
+🚀 LAUNCHING THE APPLICATION
+═══════════════════════════════════════════════════════════════════════════
+
+Method 1 (Recommended):
+   python launcher.py
+   → Verifies installation then launches
+
+Method 2 (Direct):
+   python run.py
+   → Launches without checking
+
+Method 3 (Test first):
+   python check_install.py
+   → Only checks, doesn't launch
+
+PowerShell (Windows):
+   powershell quick_start.ps1
+   → Full verification with colored output
+
+
+📊 FIRST CALCULATION (5 minutes)
+═══════════════════════════════════════════════════════════════════════════
+
+Once app is open:
+
+1. See "Accueil" tab with guide? Read it.
+
+2. Click "Essais Pompage" tab (or click button "▶ Commencer")
+
+3. In "Saisie manuelle" tab, paste this:
+   10,0.020
+   50,0.045
+   100,0.062
+   500,0.115
+   1000,0.145
+
+4. Click "Charger données saisies"
+
+5. Keep defaults:
+   - Q = 0.001 (débit)
+   - r = 50 (distance)
+   - Theis (complet)
+
+6. Click "✓ Valider"
+   → See green validation message ✓
+
+7. Click "▶ Analyser"
+   → See results: T ≈ 1.23e-03, S ≈ 4.56e-05
+   → See Theis curve graph ✓
+
+Congratulations! First calculation complete! 🎉
+
+
+❓ QUICK QUESTIONS
+═══════════════════════════════════════════════════════════════════════════
+
+Q: What is HydroAI?
+A: Platform for learning hydrogeological calculations (Theis, Lefranc, etc)
+   with AI-guided recommendations. See README.md
+
+Q: What do I need to know first?
+A: How to use Python packages. See QUICKSTART.md
+
+Q: Can I use my own data?
+A: Yes! CSV format: times(s) and drawdowns(m) per line
+   See GUIDE_ETUDIANT.py for examples
+
+Q: What if I get an error?
+A: See INSTALLATION_WINDOWS.txt troubleshooting section
+
+Q: How do I learn more?
+A: See INDEX.md for documentation guide
+
+Q: Can I extend HydroAI?
+A: Yes! See ARCHITECTURE.md for development info
+
+
+🆘 TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════
+
+"python: command not found"
+→ Python not installed or not in PATH
+→ Solution: Reinstall Python and CHECK "Add Python to PATH"
+
+"ModuleNotFoundError: numpy"
+→ Dependencies not installed
+→ Solution: pip install numpy scipy pandas PySide6 matplotlib
+
+"No module named 'PySide6'"
+→ PySide6 not installed
+→ Solution: pip install PySide6 --upgrade
+
+"Window doesn't appear"
+→ Try: python launcher.py instead of python run.py
+→ Or: Close all Python processes and try again
+
+Still stuck? 
+→ Read: INSTALLATION_WINDOWS.txt (full troubleshooting)
+→ Run: python check_install.py (diagnostic tool)
+
+
+🎓 LEARNING PATHS
+═══════════════════════════════════════════════════════════════════════════
+
+Path 1: "I just want to use it"
+   1. QUICKSTART.md (5 min)
+   2. Launch app
+   3. Follow Accueil tab guide
+   4. Experiment with tabs
+
+Path 2: "I'm a student with homework"
+   1. QUICKSTART.md (5 min)
+   2. GUIDE_ETUDIANT.py case 1 (your method)
+   3. Load your data
+   4. Analyze with app
+   5. Report results
+
+Path 3: "I want to understand everything"
+   1. README.md (overview)
+   2. ARCHITECTURE.md (how it works)
+   3. GUIDE_ETUDIANT.py (all cases)
+   4. Code docstrings (implementation)
+
+Path 4: "I'm an instructor"
+   1. README.md (features)
+   2. INSTALLATION_WINDOWS.txt (student setup)
+   3. GUIDE_ETUDIANT.py (class cases)
+   4. QUICKSTART.md (demo script)
+
+
+📂 IMPORTANT FILES AT A GLANCE
+═══════════════════════════════════════════════════════════════════════════
+
+To launch:
+├── launcher.py ⭐ (use this)
+├── run.py (or this)
+└── quick_start.ps1 (Windows verification)
+
+To learn:
+├── QUICKSTART.md ⭐ (5 min, start here)
+├── README.md (features overview)
+├── GUIDE_ETUDIANT.py (9 complete examples)
+└── INDEX.md (navigation guide)
+
+For help:
+├── INSTALLATION_WINDOWS.txt (setup issues)
+├── ARCHITECTURE.md (technical questions)
+└── VERSION_HISTORY.txt (what's included)
+
+To verify:
+├── check_install.py (test installation)
+└── MANIFEST.txt (what was created)
+
+
+✅ VERIFICATION CHECKLIST
+═══════════════════════════════════════════════════════════════════════════
+
+After launch, you should see:
+
+✓ Window titled "HydroAI - Plateforme Hydrogéologique"
+✓ 4 tabs: Accueil, Essais Pompage, Perméabilité, Piézométrie
+✓ Each tab has buttons and input fields
+✓ Status bar at bottom showing "Prêt"
+
+If all ✓ → Everything is working! 🎉
+If not → See TROUBLESHOOTING section above
+
+
+🔗 NEXT STEPS
+═══════════════════════════════════════════════════════════════════════════
+
+Right now:
+1. Open QUICKSTART.md
+   → Do the 5-minute walkthrough
+
+Then:
+2. Launch application
+   → python launcher.py
+
+Then:
+3. Try first calculation
+   → Follow guide in "First Calculation" above
+
+Then:
+4. Read GUIDE_ETUDIANT.py
+   → Study the case that matches your course
+
+Then:
+5. Load your own data
+   → CSV format (times, values)
+   → Import and analyze
+
+Finally:
+6. Read ARCHITECTURE.md
+   → Understand the methods used
+
+
+📞 GETTING HELP
+═══════════════════════════════════════════════════════════════════════════
+
+Documentation files (try these first):
+├── INDEX.md - Find what you need
+├── QUICKSTART.md - 5-minute guide
+├── INSTALLATION_WINDOWS.txt - Setup issues
+└── ARCHITECTURE.md - How it works
+
+Diagnostic tools:
+├── check_install.py - Test installation
+└── quick_start.ps1 - Verification (Windows)
+
+GitHub:
+└── https://github.com/hydroai/hydroai
+
+
+🎉 YOU'RE READY!
+═══════════════════════════════════════════════════════════════════════════
+
+Everything is installed and working.
+
+Next step: Open QUICKSTART.md or just run:
+
+   python launcher.py
+
+
+Enjoy exploring HydroAI! 🌊⛰️🔬
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+Questions? → See INDEX.md for documentation navigation
+Help? → See INSTALLATION_WINDOWS.txt troubleshooting
+Learn? → See GUIDE_ETUDIANT.py for examples
+
+Good luck! 🎓
+
+═══════════════════════════════════════════════════════════════════════════
+
+November 26, 2025
+HydroAI v0.1.0-alpha MVP

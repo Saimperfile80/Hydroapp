@@ -1,0 +1,350 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    HYDROAI - FILE REFERENCE GUIDE
+                       What to read when & why
+═══════════════════════════════════════════════════════════════════════════════
+
+📍 YOU ARE HERE - START
+═══════════════════════════════════════════════════════════════════════════════
+
+→ START_HERE.txt ⭐⭐⭐ (THIS FILE)
+  Quick overview, 3-min fast start, first calculation walkthrough
+
+→ Then read: QUICKSTART.md or README.md
+
+
+🚀 GETTING STARTED DOCUMENTS
+═══════════════════════════════════════════════════════════════════════════════
+
+QUICKSTART.md ⭐⭐⭐ (5 MINUTES)
+├─ When: First time launching
+├─ What: Installation, launching, first calculation
+├─ Read: Before anything else if you want to code
+└─ Then: Try the app
+
+README.md ⭐⭐ (10 MINUTES)
+├─ When: Want to understand what HydroAI is
+├─ What: Overview, features, capabilities, structure
+├─ Read: For understanding purpose & capabilities
+└─ Then: QUICKSTART.md or app
+
+INSTALLATION_WINDOWS.txt ⭐ (15 MINUTES)
+├─ When: On Windows and have installation issues
+├─ What: Step-by-step Windows setup, troubleshooting
+├─ Read: If you get errors
+└─ Then: Try setup again
+
+
+📚 LEARNING & CASE STUDIES
+═══════════════════════════════════════════════════════════════════════════════
+
+GUIDE_ETUDIANT.py (1-2 HOURS)
+├─ When: Want to learn with real examples
+├─ What: 9 complete case studies with full code
+├─ Cases: Theis, Cooper-Jacob, Lefranc, Lugeon, Porchet, Piezo, IA features
+├─ Read: To understand how to use each method
+├─ Who: Students, course participants
+└─ Then: Adapt examples to your own data
+
+INDEX.md (10 MINUTES)
+├─ When: Don't know which document to read
+├─ What: Navigation guide for all documentation
+├─ Read: To find the right document for your need
+└─ Then: Go to suggested document
+
+
+🔧 TECHNICAL DOCUMENTATION
+═══════════════════════════════════════════════════════════════════════════════
+
+ARCHITECTURE.md (20-30 MINUTES)
+├─ When: Want to understand the code
+├─ What: System architecture, modules, API reference
+├─ Contains: Detailed module descriptions, workflows, examples
+├─ Read: To understand code structure
+├─ Who: Developers, advanced users
+└─ Then: Read docstrings in code files
+
+MANIFEST.txt (10 MINUTES)
+├─ When: Want to know what was created
+├─ What: Detailed inventory of all files, line counts, structure
+├─ Read: To see complete project breakdown
+└─ Then: Explore the code
+
+RÉSUMÉ_CRÉATION.py (5 MINUTES)
+├─ When: Want summary of what was built
+├─ What: ASCII art summary, capabilities checklist
+├─ Read: Quick overview of deliverables
+└─ Then: ARCHITECTURE.md for details
+
+
+📋 REFERENCE DOCUMENTS
+═══════════════════════════════════════════════════════════════════════════════
+
+EXECUTIVE_SUMMARY.txt (10 MINUTES)
+├─ When: Want high-level project overview
+├─ What: Deliverables, capabilities, metrics, roadmap
+├─ Read: To understand project scope & status
+└─ Then: Specific document depending on need
+
+LIVRABLE_MVP.md (15 MINUTES)
+├─ When: Want detailed MVP deliverable info
+├─ What: What's included, capabilities table, validation results
+├─ Read: To see exactly what was delivered
+└─ Then: Specific feature documentation
+
+VERSION_HISTORY.txt (5 MINUTES)
+├─ When: Want to know version info & roadmap
+├─ What: v0.1.0 release notes, future phases, known limitations
+├─ Read: To understand what's included and what's not
+└─ Then: README.md for features
+
+
+⚙️ SETUP & VERIFICATION
+═══════════════════════════════════════════════════════════════════════════════
+
+Launchers (Scripts to run):
+├─ launcher.py
+│  └─ What: Main launcher with verification
+│     Run: python launcher.py
+│     When: Normal app launch
+│
+├─ run.py
+│  └─ What: Direct launcher
+│     Run: python run.py
+│     When: Alternative to launcher.py
+│
+├─ check_install.py
+│  └─ What: Installation verification
+│     Run: python check_install.py
+│     When: Verify setup before launching
+│
+└─ quick_start.ps1
+   └─ What: PowerShell verification script (Windows)
+      Run: powershell quick_start.ps1
+      When: Windows users want colored output
+
+
+📂 PROJECT STRUCTURE FILES
+═══════════════════════════════════════════════════════════════════════════════
+
+core/
+├─ calculations/
+│  └─ Theis, Cooper-Jacob, Lefranc, Lugeon, Porchet, Piezo modules
+│     Read docstrings: To understand calculations
+│
+└─ ai/
+   └─ Anomaly Detection, Recommender, Validator
+      Read docstrings: To understand AI logic
+
+app/
+├─ main_app.py
+│  └─ Main PySide6 application
+│
+└─ ui/tabs/
+   └─ home_tab.py, essais_pompage_tab.py, etc.
+
+
+🎓 BY ROLE / AUDIENCE
+═══════════════════════════════════════════════════════════════════════════════
+
+IF YOU ARE... → READ THIS FIRST
+
+STUDENT:
+1. START_HERE.txt (this file) - 3 min
+2. QUICKSTART.md - 5 min
+3. Launch app and play
+4. GUIDE_ETUDIANT.py - when doing homework
+
+INSTRUCTOR:
+1. README.md - understand features
+2. INSTALLATION_WINDOWS.txt - student setup
+3. GUIDE_ETUDIANT.py - see available cases
+4. QUICKSTART.md - create demo script
+
+DEVELOPER:
+1. ARCHITECTURE.md - understand design
+2. Code docstrings - understand implementation
+3. GUIDE_ETUDIANT.py - see how to use API
+4. requirements.txt - see dependencies
+
+SYSTEM ADMIN:
+1. INSTALLATION_WINDOWS.txt - installation process
+2. check_install.py - verification
+3. requirements.txt - dependencies
+4. MANIFEST.txt - what's included
+
+
+🔍 BY TASK
+═══════════════════════════════════════════════════════════════════════════════
+
+TASK: "I want to install HydroAI"
+→ INSTALLATION_WINDOWS.txt (if on Windows)
+→ Or: pip install numpy scipy pandas PySide6 matplotlib
+
+TASK: "I want to launch the app"
+→ python launcher.py
+
+TASK: "I don't know what to read"
+→ INDEX.md (navigation guide)
+
+TASK: "I want to learn how to use it"
+→ QUICKSTART.md (5 min intro)
+→ Then: GUIDE_ETUDIANT.py (case studies)
+
+TASK: "I got an error"
+→ INSTALLATION_WINDOWS.txt troubleshooting
+→ Or: python check_install.py (diagnostic)
+
+TASK: "I want to understand the code"
+→ ARCHITECTURE.md (overview)
+→ Then: Read code docstrings
+
+TASK: "I want to use my own data"
+→ GUIDE_ETUDIANT.py (see CSV format)
+→ Then: Launch app and import
+
+TASK: "I want to extend HydroAI"
+→ ARCHITECTURE.md (understand structure)
+→ Then: Look at code examples
+
+TASK: "I want to know what was built"
+→ EXECUTIVE_SUMMARY.txt (high level)
+→ MANIFEST.txt (detailed)
+→ LIVRABLE_MVP.md (complete)
+
+
+📖 READING ORDER FOR DIFFERENT GOALS
+═══════════════════════════════════════════════════════════════════════════════
+
+GOAL: Get running in 5 minutes
+1. QUICKSTART.md
+2. python launcher.py
+3. Done!
+
+GOAL: Learn all features
+1. README.md
+2. GUIDE_ETUDIANT.py
+3. ARCHITECTURE.md
+4. Code docstrings
+
+GOAL: Understand the system
+1. EXECUTIVE_SUMMARY.txt
+2. ARCHITECTURE.md
+3. MANIFEST.txt
+4. Code
+
+GOAL: Use in classroom
+1. INSTALLATION_WINDOWS.txt
+2. GUIDE_ETUDIANT.py
+3. Create assignment from case studies
+
+GOAL: Troubleshoot issues
+1. INSTALLATION_WINDOWS.txt troubleshooting
+2. python check_install.py
+3. Try suggested fixes
+
+GOAL: Extend/develop
+1. ARCHITECTURE.md
+2. README.md (features)
+3. Code and docstrings
+4. tests/ directory (if exists)
+
+
+⏱️ TIME ESTIMATES
+═══════════════════════════════════════════════════════════════════════════════
+
+Quick Start (min time):
+├─ Read START_HERE.txt: 3 min
+├─ Install packages: 3 min
+└─ Launch app: 1 sec
+TOTAL: 6 min to running app
+
+Basic Learning (min time):
+├─ Read QUICKSTART.md: 5 min
+├─ Install: 3 min
+├─ Launch: 1 sec
+└─ First calculation: 5 min
+TOTAL: 14 min to first results
+
+Full Learning:
+├─ Read README.md: 10 min
+├─ Read QUICKSTART.md: 5 min
+├─ Install: 3 min
+├─ Read GUIDE_ETUDIANT.py: 60 min
+├─ Hands-on practice: 30 min
+└─ Read ARCHITECTURE.md: 20 min
+TOTAL: 128 min (2+ hours) for full understanding
+
+Development Setup:
+├─ ARCHITECTURE.md: 30 min
+├─ GUIDE_ETUDIANT.py: 60 min
+├─ Code review: 60 min
+└─ Setup dev environment: 30 min
+TOTAL: 180 min (3 hours) for dev setup
+
+
+✅ CHECKLIST AFTER READING
+═══════════════════════════════════════════════════════════════════════════════
+
+After START_HERE.txt:
+☐ I understand HydroAI is for hydrogeological learning
+☐ I know how to launch it (python launcher.py)
+☐ I know what documents to read next
+
+After QUICKSTART.md:
+☐ I can install packages (pip install ...)
+☐ I can launch the app
+☐ I can import data or enter manually
+☐ I can run a calculation
+☐ I understand the 4 main tabs
+
+After README.md:
+☐ I know what calculations are available
+☐ I know what AI features do
+☐ I understand the pedagogical approach
+☐ I know where modules are located
+
+After GUIDE_ETUDIANT.py:
+☐ I can write Python code to use modules
+☐ I understand how to structure data
+☐ I know how to fit parameters
+☐ I can interpret results
+☐ I understand different use cases
+
+
+🎯 FINAL RECOMMENDATIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. MUST READ FIRST:
+   → START_HERE.txt (you're reading it!)
+
+2. THEN CHOOSE BASED ON YOUR GOAL:
+   
+   If want quick demo:
+   → QUICKSTART.md → python launcher.py
+
+   If student with homework:
+   → QUICKSTART.md → GUIDE_ETUDIANT.py → use app
+
+   If instructor:
+   → README.md → INSTALLATION_WINDOWS.txt → GUIDE_ETUDIANT.py
+
+   If developer:
+   → ARCHITECTURE.md → code → GUIDE_ETUDIANT.py
+
+   If confused what to read:
+   → INDEX.md (navigation guide)
+
+3. ALWAYS AVAILABLE:
+   → INSTALLATION_WINDOWS.txt (if you have setup issues)
+   → python check_install.py (diagnostic tool)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Now you know where everything is!
+
+NEXT: Go read QUICKSTART.md or just run: python launcher.py
+
+═══════════════════════════════════════════════════════════════════════════════
+
+November 26, 2025 | HydroAI v0.1.0-alpha

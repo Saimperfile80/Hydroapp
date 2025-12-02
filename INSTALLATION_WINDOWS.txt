@@ -1,0 +1,214 @@
+================================================================================
+HYDROAI - GUIDE INSTALLATION WINDOWS
+================================================================================
+
+SYSTEME MINIMUM REQUIS:
+- Windows 7+ (7, 8, 10, 11)
+- Python 3.8+ (Recommandé: 3.10+)
+- RAM: 1 GB
+- Disk: 200 MB
+
+================================================================================
+STEP 1: INSTALLER PYTHON (Si pas déjà installé)
+================================================================================
+
+Option A: Python officiel (python.org)
+1. Aller sur https://www.python.org/downloads/
+2. Cliquer "Download Python 3.11" (ou plus récent)
+3. Lancer installateur .exe
+4. ✓ Cocher "Add Python to PATH" (IMPORTANT!)
+5. Cliquer "Install Now"
+6. Attendre fin installation
+
+Option B: Anaconda (Recommandé pour scientifique)
+1. Télécharger Anaconda depuis https://www.anaconda.com/download
+2. Lancer installateur
+3. Suivre wizard (garder defaults)
+4. Anaconda ajoutera Python automatiquement
+
+VERIFICATION:
+- Ouvrir PowerShell/CMD
+- Taper: python --version
+- Doit afficher: Python 3.x.x
+
+================================================================================
+STEP 2: TELECHARGER HYDROAI
+================================================================================
+
+Option A: Git (Si vous avez Git)
+1. PowerShell: git clone https://github.com/hydroai/hydroai.git
+2. cd hydroai
+
+Option B: ZIP manuel
+1. Télécharger ZIP depuis GitHub
+2. Décompresser dans dossier (ex: C:\Users\VotreNom\hydroai)
+3. Ouvrir PowerShell dans ce dossier
+
+VERIFICATION:
+- Dossier hydroai doit contenir:
+  ✓ launcher.py
+  ✓ core/ (dossier)
+  ✓ app/ (dossier)
+  ✓ README.md
+
+================================================================================
+STEP 3: INSTALLER DEPENDANCES
+================================================================================
+
+METHODE 1 (Simple, Recommandée):
+1. Ouvrir PowerShell/CMD
+2. Naviguer: cd C:\Users\VotreNom\hydroai
+3. Taper (copier-coller):
+
+   pip install numpy scipy pandas PySide6 matplotlib
+
+4. Attendre fin (2-3 min selon débit internet)
+
+METHODE 2 (Si pip ne marche pas):
+1. Taper: python -m pip install --upgrade pip
+2. Puis recommencer méthode 1
+
+VERIFICATION:
+- Taper: pip list
+- Doit afficher:
+  ✓ numpy
+  ✓ scipy
+  ✓ pandas
+  ✓ PySide6
+  ✓ matplotlib
+
+================================================================================
+STEP 4: LANCER L'APPLICATION
+================================================================================
+
+METHODE 1 (La plus simple):
+1. PowerShell dans dossier hydroai
+2. Taper: python launcher.py
+3. Fenêtre HydroAI doit s'ouvrir en 2-3 secondes
+
+METHODE 2 (Alternatif):
+1. Taper: python run.py
+
+METHODE 3 (Direct):
+1. Double-cliquer launcher.py dans l'explorateur
+   (Dossier doit être associé à Python)
+
+VERIFICATION:
+✓ Fenêtre PySide6 avec titre "HydroAI - Modélisation Hydrogéologique"
+✓ 4 onglets: Accueil, Essais Pompage, Perméabilité, Piézométrie
+✓ Zone message d'état en bas
+
+================================================================================
+STEP 5: TESTER IMMEDIATEMENT
+================================================================================
+
+1. Onglet "Essais Pompage" (ou cliquer bouton "Commencer")
+2. Tab "Saisie manuelle"
+3. Copier-coller ceci dans zone texte:
+   10,0.020
+   50,0.045
+   100,0.062
+   500,0.115
+   1000,0.145
+
+4. Cliquer bouton "Charger données saisies"
+5. Paramètres:
+   - Q = 0.001 (OK par défaut)
+   - r = 50 (OK par défaut)
+   - Méthode = "Theis (complet)"
+
+6. Cliquer "✓ Valider"
+   → Voir rapport validation IA en vert (OK)
+
+7. Cliquer "▶ Analyser"
+   → Voir résultats:
+     • T ≈ 1.23e-03 m²/s
+     • S ≈ 4.56e-05
+   → Voir graphique courbe Theis
+
+✓ SI VOUS VOYEZ CELA: Installation OK!
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Q: "python: commande non trouvée"
+A: Python n'est pas dans PATH
+   Solution: 
+   - Réinstaller Python en cochant "Add Python to PATH"
+   OU utiliser chemin complet: C:\Python311\python.exe launcher.py
+
+Q: "ModuleNotFoundError: numpy"
+A: Packages non installés
+   Solution: pip install numpy scipy pandas PySide6 matplotlib
+
+Q: "No module named 'PySide6'"
+A: PySide6 non installé correctement
+   Solution: 
+   - pip uninstall PySide6
+   - pip install PySide6 --upgrade
+
+Q: Fenêtre ne s'affiche pas
+A: Problème X11 ou affichage
+   Solution:
+   - Vérifier Python 3.8+: python --version
+   - Essayer launcher.py au lieu run.py
+   - Redémarrer PowerShell
+
+Q: "AttributeError" ou autres erreurs Python
+A: Modules corrompus ou chemins mal configurés
+   Solution:
+   - Vérifier structure dossier (STEP 2)
+   - pip install -r requirements.txt (si fichier existe)
+   - Réinstaller packages: pip install --upgrade numpy scipy pandas PySide6
+
+Q: Application très lente
+A: Dépendances à la première fois sont normales (5-10 sec)
+   Si toujours lent:
+   - Fermer autre applications
+   - Redémarrer Python
+
+================================================================================
+PROXIES ENTREPRISE (Si derrière firewall)
+================================================================================
+
+Si pip timeout:
+pip install --proxy "[user:passwd@]proxy.server:port" numpy scipy...
+
+OU configurer:
+pip config set global.index-url https://pypi.python.org/simple
+
+================================================================================
+DESINSTALLER / RESET
+================================================================================
+
+Nettoyer tout:
+1. PowerShell: pip uninstall numpy scipy pandas PySide6 matplotlib
+2. Supprimer dossier hydroai
+3. Réinstaller depuis STEP 2
+
+================================================================================
+AIDE SUPPLEMENTAIRE
+================================================================================
+
+- QUICKSTART.md: Guide rapide utilisation
+- README.md: Documentation complète
+- GUIDE_ETUDIANT.py: 9 cas d'étude complets
+- check_install.py: Vérifier installation (python check_install.py)
+
+================================================================================
+CONTACT / SUPPORT
+================================================================================
+
+Email: [A compléter]
+Issues GitHub: https://github.com/hydroai/hydroai/issues
+
+================================================================================
+BON TRAVAIL!
+================================================================================
+
+Vous êtes prêt à utiliser HydroAI pour vos études en hydrogéologie!
+
+Commencez par QUICKSTART.md pour guide 5 minutes.
+
+================================================================================
